@@ -29,7 +29,11 @@
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
+
+    /* Layout */
+    --container-width: 1200px;
 }
+
 
 /* ===================================
    RESET & BASE STYLES
@@ -204,11 +208,71 @@ a:hover {
     min-height: 60vh;
 }
 
+/* Page UI (About, Contact, Privacy) */
+.page-content {
+    background: white;
+    max-width: 800px;
+    /* Constrain reading width */
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.page-content h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.page-content h2 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--background-alt);
+    padding-bottom: var(--spacing-xs);
+}
+
+.page-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.page-content ul {
+    margin-bottom: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
+}
+
+.page-content li {
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.05rem;
+}
+
+
 .content-wrapper {
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: var(--spacing-xl);
 }
+
+/* Single Post Layout Change */
+/* Single Post Layout Change */
+.single-post .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    /* Sidebar Right */
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+
+
 
 /* ===================================
    POSTS GRID
@@ -227,19 +291,23 @@ a:hover {
     background-color: var(--background-color);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* Astra-like soft shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Very subtle border */
 }
 
 .post-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+
 
 .post-card-image {
     width: 100%;
-    height: 200px;
+    height: 220px;
+    /* Increased from 200px */
     overflow: hidden;
     background-color: var(--background-alt);
 }
@@ -248,6 +316,7 @@ a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
 }
 
@@ -325,9 +394,11 @@ a:hover {
     background-color: var(--background-color);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* Astra-like soft shadow */
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
+
 
 .post-header {
     padding: var(--spacing-lg);
@@ -339,23 +410,34 @@ a:hover {
     font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 1.5rem;
+    /* Increased spacing */
     line-height: 1.2;
     color: var(--text-color);
 }
 
+
+
 .post-featured-image {
     width: 100%;
-    height: 400px;
+    aspect-ratio: 16/9;
+    /* Constrain aspect ratio */
+    height: auto;
     overflow: hidden;
     background-color: var(--background-alt);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .post-featured-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Ensure image covers the area */
+    display: block;
 }
+
+
 
 .post-body {
     padding: var(--spacing-xl) var(--spacing-lg);
@@ -416,23 +498,124 @@ a:hover {
     margin-top: var(--spacing-xl);
 }
 
+/* Related Posts */
+.related-posts {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+}
+
+.related-posts-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.related-post-card {
+    display: flex;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.related-post-card:hover {
+    transform: translateY(-2px);
+}
+
+.related-post-image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.related-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.related-post-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.related-post-title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    color: var(--text-color);
+}
+
+.related-post-category {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.related-post-date {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+
 /* ===================================
    SIDEBAR
    =================================== */
 .sidebar {
-    position: sticky;
-    top: 100px;
     height: fit-content;
 }
 
+/* Single Post: Right Sidebar */
+.single-post .sidebar {
+    grid-column: 2;
+    /* Right Column */
+    grid-row: 1 / span 2;
+    display: block;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    position: sticky;
+    top: 20px;
+}
+
+.single-post .post-article {
+    grid-column: 1;
+    /* Left Column */
+}
+
+.single-post .related-posts {
+    grid-column: 1;
+    /* Left Column */
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+}
+
+
+
+
 .sidebar-widget {
     background-color: var(--background-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
+    /* More padding */
     margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* Astra-like soft shadow */
 }
+
 
 .widget-title {
     font-family: var(--font-heading);
@@ -551,12 +734,37 @@ a:hover {
         grid-template-columns: 1fr;
     }
 
-    .sidebar {
-        position: static;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: var(--spacing-md);
+    /* Reset Single Post Grid for Mobile */
+    .single-post .content-wrapper {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
     }
+
+    .single-post .sidebar,
+    .single-post .post-article,
+    .single-post .related-posts {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        width: 100%;
+    }
+
+    .single-post .sidebar {
+        position: static;
+        margin-top: var(--spacing-xl);
+        order: 3;
+        /* Ensure it stays at bottom */
+    }
+
+    .single-post .post-article {
+        order: 1;
+    }
+
+    .single-post .related-posts {
+        order: 2;
+    }
+
+
 
     .posts-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -644,5 +852,459 @@ a:hover {
 
     .post-title {
         font-size: 1.5rem;
+    }
+}
+
+/* ===================================
+   HERO CAROUSEL
+   =================================== */
+.hero-carousel {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+}
+
+.carousel-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.carousel-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    min-height: 300px;
+}
+
+.carousel-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.carousel-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.carousel-item-content {
+    padding: 20px;
+}
+
+.carousel-item-category {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.carousel-item-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin: 10px 0;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.carousel-item-excerpt {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.carousel-item-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.3s ease;
+}
+
+.carousel-item-link:hover {
+    gap: 10px;
+}
+
+.carousel-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: white;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: white;
+    width: 30px;
+    border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carousel-track {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .carousel-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+/* ===================================
+   HERO CAROUSEL - AUTO-SLIDING
+   =================================== */
+.hero-carousel {
+    position: relative;
+    width: 100vw;
+    /* Full viewport width */
+    margin-left: calc(-50vw + 50%);
+    /* Break out of container */
+    height: 450px;
+    /* Reduced from 600px */
+    overflow: hidden;
+    background: #000;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+    cursor: pointer;
+    /* Make it clickable */
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.carousel-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0.7) 100%);
+}
+
+.carousel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 60px;
+    color: white;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    cursor: pointer;
+    /* Make text clickable too */
+}
+
+.carousel-category {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.carousel-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-excerpt {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+    opacity: 0.95;
+    max-width: 600px;
+}
+
+.carousel-btn-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    color: var(--primary-color);
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn-read:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    gap: 15px;
+}
+
+.carousel-btn-read svg {
+    transition: transform 0.3s ease;
+}
+
+.carousel-btn-read:hover svg {
+    transform: translateX(5px);
+}
+
+/* Navigation Arrows */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav.prev {
+    left: 30px;
+}
+
+.carousel-nav.next {
+    right: 30px;
+}
+
+/* Dots Indicator */
+.carousel-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: white;
+    width: 40px;
+    border-radius: 6px;
+}
+
+/* Loading State */
+.carousel-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-carousel {
+        height: 500px;
+    }
+
+    .carousel-content {
+        padding: 30px 20px;
+    }
+
+    .carousel-title {
+        font-size: 2rem;
+    }
+
+    .carousel-excerpt {
+        font-size: 1rem;
+    }
+
+    .carousel-nav {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-nav.prev {
+        left: 15px;
+    }
+
+    .carousel-nav.next {
+        right: 15px;
     }
 }
