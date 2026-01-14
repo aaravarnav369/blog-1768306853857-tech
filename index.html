@@ -21,7 +21,7 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="index.html">
-                        <h1>Blog</h1>
+                        <h1>Tech</h1>
                     </a>
                 </div>
                 <nav class="main-nav">
@@ -40,14 +40,35 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">Blog</h2>
-                <p class="hero-description">Explore our collection of General content, tips, and insights.</p>
-                <a href="#postsGrid" class="hero-btn">Explore Articles</a>
+    <!-- Hero Carousel Section -->
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <div class="carousel-slides" id="heroCarousel">
+                <!-- Loading state -->
+                <div class="carousel-slide active">
+                    <div class="carousel-image-wrapper">
+                        <div class="carousel-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading featured posts...</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Navigation Arrows -->
+            <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-nav next" id="carouselNext" aria-label="Next slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Dots Indicator -->
+            <div class="carousel-dots" id="carouselDots"></div>
         </div>
     </section>
 
@@ -71,7 +92,10 @@
                         <!-- Posts will be dynamically loaded here -->
                         <div class="loading">Loading posts...</div>
                     </div>
+                    <!-- Pagination Controls -->
+                    <div id="pagination" class="pagination"></div>
                 </section>
+
 
                 <!-- Sidebar -->
                 <aside class="sidebar">
@@ -110,10 +134,11 @@
                 </div>
                 <div class="footer-links">
                     <ul>
-                        <li><a href="#privacy">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
+
                 </div>
             </div>
         </div>
